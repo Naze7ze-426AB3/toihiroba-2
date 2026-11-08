@@ -350,7 +350,7 @@ input:focus, textarea:focus {
     <div class="empty">写真を選ぶと、ここに大きく表示されます。</div>
   </div>
 
-  <h3>自分が発掘した問い</h3>
+  <h3>みんなが見つけた問い</h3>
   <div id="discoveryList"></div>
 
 </section>
@@ -367,7 +367,7 @@ input:focus, textarea:focus {
     <h3>問いのおすそわけ</h3>
 
     <textarea id="questionInput"
-      placeholder="たとえば、どうして空は青いんだろう？"></textarea>
+      placeholder="例.どうして空は青いんだろう？"></textarea>
 
     <div class="image-picker">
       <label for="questionImage">＋ 画像を添える（任意）</label>
@@ -386,7 +386,7 @@ input:focus, textarea:focus {
 
     <div class="actions">
       <button class="primary" id="postQuestion">
-        問いを投稿する
+        問いをおすそわけする
       </button>
     </div>
 
@@ -402,9 +402,9 @@ input:focus, textarea:focus {
 <!-- 持ち帰った問い -->
 <section id="saved" class="page">
 
-  <h2>問いの持ち帰り</h2>
+  <h2>問いのお持ち帰り</h2>
   <p class="description">
-    気になった問いを、あとでもう一度考えてみよう。
+    気になった問いを、持ち帰って、あとでもう一度考えてみよう。
   </p>
 
   <div id="savedList"></div>
@@ -705,7 +705,7 @@ function renderDiscoveryArea() {
 
   const textarea = document.createElement("textarea");
   textarea.id = "discoveryInput";
-  textarea.placeholder = "たとえば、どうしてこうなっているんだろう？";
+  textarea.placeholder = "たとえば、この写真の中にあるものは、どうしてこの形なのだろう？";
 
   const button = createElement(
     "button",
