@@ -442,6 +442,7 @@ input:focus, textarea:focus {
 /* --------------------------------
    写真データ
 -------------------------------- */
+
   your-project/
 ├── index.html
 ├── style.css
@@ -449,28 +450,31 @@ input:focus, textarea:focus {
     ├── home.png
     ├── school.png
     └── town.png
+      
+<script>
+  const photos = [
+    {
+      id: "rain",
+      title: "1",
+      src: "./images/home.png",
+      alt: "家の中"
+    },
+    {
+      id: "roots",
+      title: "2",
+      src: "./images/school.png",
+      alt: "学校"
+    },
+    {
+      id: "rust",
+      title: "3",
+      src: "./images/town.png",
+      alt: "街の中"
+    }
+  ];
 
-const photos = [
-  
-  {
-    id: "rain",
-    title: "1",
-     <img src="./images/home.png",
-    alt: "家の中"
-  },
-  {
-    id: "roots",
-    title: "2",
-    img src="./images/school.png",
-    alt: "学校"
-  },
-  {
-    id: "rust",
-    title: "3",
-    img src="./images/town.png",
-    alt: "街の中"
-  }
-];
+  // この下に、ほかのJavaScriptの処理が続く
+</script>
 
 
 /* --------------------------------
