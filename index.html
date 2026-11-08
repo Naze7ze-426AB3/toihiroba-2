@@ -1,0 +1,1173 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>問いの広場</title>
+
+<style>
+:root {
+  --main: #587c75;
+  --main-light: #eaf1ee;
+  --bg: #f7f8f5;
+  --text: #303a36;
+  --muted: #78827d;
+  --border: #e2e7e2;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.7;
+}
+
+header {
+  background: var(--white);
+  padding: 28px 20px 18px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 27px;
+  letter-spacing: 0.08em;
+  color: var(--main);
+}
+
+header p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+nav button {
+  border: none;
+  background: transparent;
+  padding: 9px 14px;
+  border-radius: 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+nav button.active {
+  background: var(--main-light);
+  color: var(--main);
+  font-weight: bold;
+}
+
+main {
+  max-width: 760px;
+  margin: 30px auto;
+  padding: 0 18px 60px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+h2 {
+  font-size: 21px;
+  margin: 0 0 8px;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 22px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 18px;
+  margin-bottom: 17px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font: inherit;
+  background: #fff;
+  color: var(--text);
+}
+
+textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid #b8d0c8;
+  border-color: var(--main);
+}
+
+.primary {
+  background: var(--main);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+.secondary {
+  background: var(--main-light);
+  color: var(--main);
+  border: none;
+  border-radius: 9px;
+  padding: 8px 13px;
+  font-size: 13px;
+}
+
+.danger {
+  background: #f8eeee;
+  color: #a45e5e;
+  border: none;
+  border-radius: 9px;
+  padding: 8px 13px;
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.photo-choice {
+  padding: 0;
+  overflow: hidden;
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 13px;
+  text-align: left;
+}
+
+.photo-choice.selected {
+  border-color: var(--main);
+  box-shadow: 0 0 0 2px var(--main-light);
+}
+
+.photo-choice img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.photo-choice span {
+  display: block;
+  padding: 8px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.selected-photo {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 5px 0 15px;
+}
+
+.post-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-top: 12px;
+  background: #f1f2ef;
+}
+
+.post-title {
+  font-weight: bold;
+  font-size: 16px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.post-meta {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.reply {
+  border-left: 3px solid #dce8e2;
+  padding: 9px 12px;
+  margin-top: 12px;
+  background: #f8faf8;
+  border-radius: 0 8px 8px 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.reply-form {
+  margin-top: 13px;
+}
+
+.reply-form textarea {
+  min-height: 65px;
+}
+
+.image-picker {
+  border: 1px dashed #aabbb2;
+  background: #f8faf8;
+  border-radius: 11px;
+  padding: 15px;
+  margin-top: 12px;
+}
+
+.image-picker label {
+  display: inline-block;
+  color: var(--main);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.image-picker input {
+  display: none;
+}
+
+.image-hint {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 5px 0 0;
+}
+
+.preview {
+  display: none;
+  margin-top: 12px;
+}
+
+.preview img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  background: #f1f2ef;
+  border-radius: 9px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px 12px;
+  font-size: 14px;
+}
+
+.small-note {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+@media (max-width: 480px) {
+  main {
+    margin-top: 20px;
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+
+  .photo-grid {
+    gap: 7px;
+  }
+
+  .photo-choice span {
+    font-size: 11px;
+    padding: 6px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>問いの広場</h1>
+  <p>いつもの景色に、まだ知らない問いを。</p>
+</header>
+
+<nav>
+  <button class="active" data-page="discover">発掘隊</button>
+  <button data-page="room">雑談部屋</button>
+  <button data-page="saved">持ち帰った問い</button>
+  <button data-page="hidden">非表示にした投稿</button>
+</nav>
+
+<main>
+
+<!-- 発掘隊 -->
+<section id="discover" class="page active">
+
+  <h2>これってなんで？発掘隊</h2>
+  <p class="description">
+    いつもの景色を、少し違う角度から眺めてみよう。
+    気になる写真を選んで、そこから問いを見つけてみよう。
+  </p>
+
+  <div id="photoGrid" class="photo-grid"></div>
+
+  <div id="discoveryArea" class="card">
+    <div class="empty">写真を選ぶと、ここに大きく表示されます。</div>
+  </div>
+
+  <h3>自分が発掘した問い</h3>
+  <div id="discoveryList"></div>
+
+</section>
+
+
+<!-- 雑談部屋 -->
+<section id="room" class="page">
+
+  <h2>問いの雑談部屋</h2>
+  <p class="description">
+    発掘隊で見つけた問いも、日常で思いついた問いも自由に投稿できます。
+  </p>
+
+  <div class="card">
+    <h3>問いのおすそわけ</h3>
+
+    <textarea id="questionInput"
+      placeholder="たとえば、どうして空は青いんだろう？"></textarea>
+
+    <div class="image-picker">
+      <label for="questionImage">＋ 画像を添える（任意）</label>
+      <input id="questionImage" type="file"
+        accept="image/*">
+      <p class="image-hint">
+        写真がなくても投稿できます。
+      </p>
+
+      <div id="questionPreview" class="preview">
+        <img id="questionPreviewImage" alt="添付画像のプレビュー">
+        <button class="danger" id="removeQuestionImage" type="button">
+          画像を取り消す
+        </button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="postQuestion">
+        問いを投稿する
+      </button>
+    </div>
+
+    <p class="small-note">
+      ※個人情報や、他の人の許可を得ていない写真は投稿しないようにしましょう。
+    </p>
+  </div>
+
+  <div id="questionList"></div>
+
+</section>
+
+
+<!-- 持ち帰った問い -->
+<section id="saved" class="page">
+
+  <h2>問いの持ち帰り</h2>
+  <p class="description">
+    気になった問いを、あとでもう一度考えてみよう。
+  </p>
+
+  <div id="savedList"></div>
+
+</section>
+
+
+<!-- 非表示 -->
+<section id="hidden" class="page">
+
+  <h2>非表示にした投稿</h2>
+  <p class="description">
+    ここにある投稿は、このブラウザ上でだけ非表示になっています。
+    いつでも元に戻せます。
+  </p>
+
+  <div class="actions">
+    <button class="secondary" id="restoreAll">
+      すべて再表示する
+    </button>
+  </div>
+
+  <div id="hiddenList"></div>
+
+</section>
+
+</main>
+
+
+<script>
+/* --------------------------------
+   写真データ
+-------------------------------- */
+
+const photos = [
+  {
+    id: "rain",
+    title: "窓についた雨粒",
+    src: "https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=1000",
+    alt: "窓についた雨粒"
+  },
+  {
+    id: "roots",
+    title: "地面を押し上げる木の根",
+    src: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1000",
+    alt: "木の根や植物"
+  },
+  {
+    id: "rust",
+    title: "古い金属の柵",
+    src: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1000",
+    alt: "古い金属の質感"
+  }
+];
+
+
+/* --------------------------------
+   データの初期化
+-------------------------------- */
+
+const STORAGE_KEY = "toinhiroba_prototype_v2";
+
+const starterQuestions = [
+  {
+    id: "starter1",
+    text: "雨の日は、どうして音が静かに聞こえることがあるんだろう？",
+    image: null,
+    replies: [
+      "雨の音がほかの生活音を覆っているからかな？"
+    ],
+    starter: true
+  },
+  {
+    id: "starter2",
+    text: "時計の文字盤は、どうして12個の数字なんだろう？",
+    image: null,
+    replies: [],
+    starter: true
+  }
+];
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved) {
+      const parsed = JSON.parse(saved);
+
+      return {
+        discoveries: parsed.discoveries || [],
+        questions: parsed.questions || starterQuestions,
+        saved: parsed.saved || [],
+        hidden: parsed.hidden || []
+      };
+    }
+  } catch (error) {
+    console.error("データの読み込みに失敗しました", error);
+  }
+
+  return {
+    discoveries: [],
+    questions: starterQuestions.map(q => ({...q})),
+    saved: [],
+    hidden: []
+  };
+}
+
+let data = loadData();
+
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (error) {
+    alert("保存できませんでした。画像の容量が大きい可能性があります。");
+    console.error(error);
+  }
+}
+
+
+/* --------------------------------
+   共通処理
+-------------------------------- */
+
+function createElement(tag, className, text) {
+  const el = document.createElement(tag);
+
+  if (className) {
+    el.className = className;
+  }
+
+  if (text !== undefined) {
+    el.textContent = text;
+  }
+
+  return el;
+}
+
+function findQuestion(id) {
+  return data.questions.find(q => q.id === id);
+}
+
+function makeId() {
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2, 8);
+}
+
+function showPage(pageName) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === pageName);
+  });
+
+  document.querySelectorAll("nav button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === pageName
+    );
+  });
+
+  renderAll();
+}
+
+document.querySelectorAll("nav button").forEach(button => {
+  button.addEventListener("click", () => {
+    showPage(button.dataset.page);
+  });
+});
+
+
+/* --------------------------------
+   画像の読み込み・縮小
+-------------------------------- */
+
+// 画像を縮小して保存用データに変換する。
+// localStorageの容量を圧迫しにくくするための処理。
+
+function compressImage(file) {
+  return new Promise((resolve, reject) => {
+    if (!file || !file.type.startsWith("image/")) {
+      reject(new Error("画像ファイルを選択してください。"));
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = event => {
+      const image = new Image();
+
+      image.onload = () => {
+        const maxSize = 1200;
+
+        let width = image.width;
+        let height = image.height;
+
+        if (width > maxSize || height > maxSize) {
+          const ratio = Math.min(
+            maxSize / width,
+            maxSize / height
+          );
+
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext("2d");
+
+        context.drawImage(image, 0, 0, width, height);
+
+        resolve(canvas.toDataURL("image/jpeg", 0.78));
+      };
+
+      image.onerror = () => reject(
+        new Error("画像を読み込めませんでした。")
+      );
+
+      image.src = event.target.result;
+    };
+
+    reader.onerror = () => reject(
+      new Error("ファイルを読み込めませんでした。")
+    );
+
+    reader.readAsDataURL(file);
+  });
+}
+
+
+/* --------------------------------
+   発掘隊
+-------------------------------- */
+
+let selectedPhoto = null;
+
+function renderPhotoGrid() {
+  const grid = document.getElementById("photoGrid");
+  grid.replaceChildren();
+
+  photos.forEach(photo => {
+    const button = createElement("button", "photo-choice");
+
+    if (selectedPhoto === photo.id) {
+      button.classList.add("selected");
+    }
+
+    button.type = "button";
+
+    const img = document.createElement("img");
+    img.src = photo.src;
+    img.alt = photo.alt;
+    img.loading = "lazy";
+
+    const title = createElement("span", "", photo.title);
+
+    button.append(img, title);
+
+    button.addEventListener("click", () => {
+      selectedPhoto = photo.id;
+      renderPhotoGrid();
+      renderDiscoveryArea();
+    });
+
+    grid.appendChild(button);
+  });
+}
+
+function renderDiscoveryArea() {
+  const area = document.getElementById("discoveryArea");
+  area.replaceChildren();
+
+  const photo = photos.find(p => p.id === selectedPhoto);
+
+  if (!photo) {
+    area.appendChild(
+      createElement("div", "empty", "気になる写真を選んでみよう。")
+    );
+    return;
+  }
+
+  const title = createElement("h3", "", photo.title);
+
+  const img = document.createElement("img");
+  img.className = "selected-photo";
+  img.src = photo.src;
+  img.alt = photo.alt;
+
+  const label = createElement(
+    "p",
+    "small-note",
+    "この写真を見て、どんなことが気になった？"
+  );
+
+  const textarea = document.createElement("textarea");
+  textarea.id = "discoveryInput";
+  textarea.placeholder = "たとえば、どうしてこうなっているんだろう？";
+
+  const button = createElement(
+    "button",
+    "primary",
+    "問いを発掘する"
+  );
+
+  button.type = "button";
+
+  button.addEventListener("click", () => {
+    const text = textarea.value.trim();
+
+    if (!text) {
+      alert("まずは、気になったことを書いてみよう。");
+      return;
+    }
+
+    data.discoveries.unshift({
+      id: makeId(),
+      photoId: photo.id,
+      text,
+      date: new Date().toLocaleDateString("ja-JP")
+    });
+
+    saveData();
+    renderDiscoveryList();
+
+    textarea.value = "";
+
+    alert("問いを発掘しました！");
+  });
+
+  area.append(title, img, label, textarea, button);
+}
+
+function renderDiscoveryList() {
+  const list = document.getElementById("discoveryList");
+  list.replaceChildren();
+
+  const visible = data.discoveries.filter(
+    item => !data.hidden.includes(item.id)
+  );
+
+  if (visible.length === 0) {
+    list.appendChild(
+      createElement("div", "empty", "まだ発掘した問いはありません。")
+    );
+    return;
+  }
+
+  visible.forEach(item => {
+    const photo = photos.find(p => p.id === item.photoId);
+
+    const card = createElement("div", "card");
+
+    card.appendChild(
+      createElement(
+        "div",
+        "post-meta",
+        (photo ? photo.title : "発掘した問い") + " ・ " + item.date
+      )
+    );
+
+    card.appendChild(createElement("div", "post-title", item.text));
+
+    const actions = createElement("div", "actions");
+
+    const shareButton = createElement(
+      "button",
+      "secondary",
+      "雑談部屋へおすそわけ"
+    );
+
+    shareButton.addEventListener("click", () => {
+      data.questions.unshift({
+        id: makeId(),
+        text: item.text,
+        image: null,
+        discoveryPhotoId: item.photoId,
+        replies: [],
+        starter: false
+      });
+
+      saveData();
+      showPage("room");
+    });
+
+    const hideButton = createElement(
+      "button",
+      "danger",
+      "非表示にする"
+    );
+
+    hideButton.addEventListener("click", () => {
+      hideItem(item.id);
+    });
+
+    actions.append(shareButton, hideButton);
+    card.appendChild(actions);
+    list.appendChild(card);
+  });
+}
+
+
+/* --------------------------------
+   問いのおすそわけ：画像選択
+-------------------------------- */
+
+let attachedImage = null;
+
+const imageInput = document.getElementById("questionImage");
+const preview = document.getElementById("questionPreview");
+const previewImage = document.getElementById("questionPreviewImage");
+
+imageInput.addEventListener("change", async () => {
+  const file = imageInput.files[0];
+
+  if (!file) return;
+
+  try {
+    attachedImage = await compressImage(file);
+
+    previewImage.src = attachedImage;
+    preview.style.display = "block";
+
+  } catch (error) {
+    alert(error.message || "画像を読み込めませんでした。");
+    attachedImage = null;
+    imageInput.value = "";
+    preview.style.display = "none";
+  }
+});
+
+function removeAttachedImage() {
+  attachedImage = null;
+  imageInput.value = "";
+  previewImage.removeAttribute("src");
+  preview.style.display = "none";
+}
+
+document.getElementById("removeQuestionImage")
+  .addEventListener("click", removeAttachedImage);
+
+
+/* --------------------------------
+   問いの投稿
+-------------------------------- */
+
+document.getElementById("postQuestion")
+  .addEventListener("click", () => {
+
+    const input = document.getElementById("questionInput");
+    const text = input.value.trim();
+
+    if (!text) {
+      alert("問いを書いてから投稿してください。");
+      return;
+    }
+
+    data.questions.unshift({
+      id: makeId(),
+      text,
+      image: attachedImage,
+      replies: [],
+      starter: false
+    });
+
+    saveData();
+
+    input.value = "";
+    removeAttachedImage();
+
+    renderQuestionList();
+
+    alert("問いをおすそわけしました！");
+  });
+
+
+/* --------------------------------
+   雑談部屋の表示
+-------------------------------- */
+
+function renderQuestionList() {
+  const list = document.getElementById("questionList");
+  list.replaceChildren();
+
+  const visible = data.questions.filter(
+    q => !data.hidden.includes(q.id)
+  );
+
+  if (visible.length === 0) {
+    list.appendChild(
+      createElement("div", "empty", "まだ問いはありません。")
+    );
+    return;
+  }
+
+  visible.forEach(question => {
+    const card = createElement("div", "card");
+
+    card.appendChild(
+      createElement(
+        "div",
+        "post-meta",
+        question.starter ? "問いのサンプル" : "問いのおすそわけ"
+      )
+    );
+
+    card.appendChild(
+      createElement("div", "post-title", question.text)
+    );
+
+    // ユーザーが添付した画像
+    if (question.image) {
+      const img = document.createElement("img");
+      img.className = "post-image";
+      img.src = question.image;
+      img.alt = "投稿に添付された画像";
+      img.loading = "lazy";
+      card.appendChild(img);
+    }
+
+    // 発掘隊から共有された写真
+    if (question.discoveryPhotoId) {
+      const photo = photos.find(
+        p => p.id === question.discoveryPhotoId
+      );
+
+      if (photo) {
+        const img = document.createElement("img");
+        img.className = "post-image";
+        img.src = photo.src;
+        img.alt = photo.alt;
+        img.loading = "lazy";
+        card.appendChild(img);
+      }
+    }
+
+    // おかえし
+    (question.replies || []).forEach(reply => {
+      card.appendChild(
+        createElement("div", "reply", reply)
+      );
+    });
+
+    const replyForm = createElement("div", "reply-form");
+
+    const replyInput = document.createElement("textarea");
+    replyInput.placeholder =
+      "この問いについて、今の自分が考えたことを書いてみよう。";
+
+    const prompt = createElement(
+      "p",
+      "small-note",
+      "すぐに賛成・反対を決めなくても大丈夫。「この人はどうしてそう考えたんだろう？」と、一度立ち止まってみよう。"
+    );
+
+    const replyButton = createElement(
+      "button",
+      "secondary",
+      "おかえしを置く"
+    );
+
+    replyButton.addEventListener("click", () => {
+      const text = replyInput.value.trim();
+
+      if (!text) {
+        alert("考えたことを書いてみよう。");
+        return;
+      }
+
+      question.replies.push(text);
+
+      saveData();
+      renderQuestionList();
+    });
+
+    replyForm.append(prompt, replyInput, replyButton);
+    card.appendChild(replyForm);
+
+    const actions = createElement("div", "actions");
+
+    const saveButton = createElement(
+      "button",
+      "secondary",
+      data.saved.includes(question.id)
+        ? "持ち帰り済み"
+        : "問いを持ち帰る"
+    );
+
+    saveButton.addEventListener("click", () => {
+      toggleSaved(question.id);
+    });
+
+    const hideButton = createElement(
+      "button",
+      "danger",
+      "非表示にする"
+    );
+
+    hideButton.addEventListener("click", () => {
+      hideItem(question.id);
+    });
+
+    actions.append(saveButton, hideButton);
+    card.appendChild(actions);
+
+    list.appendChild(card);
+  });
+}
+
+
+/* --------------------------------
+   持ち帰り
+-------------------------------- */
+
+function toggleSaved(id) {
+  if (data.saved.includes(id)) {
+    data.saved = data.saved.filter(item => item !== id);
+  } else {
+    data.saved.push(id);
+  }
+
+  saveData();
+  renderAll();
+}
+
+function renderSaved() {
+  const list = document.getElementById("savedList");
+  list.replaceChildren();
+
+  const savedQuestions = data.questions.filter(
+    q => data.saved.includes(q.id) &&
+         !data.hidden.includes(q.id)
+  );
+
+  if (savedQuestions.length === 0) {
+    list.appendChild(
+      createElement("div", "empty", "持ち帰った問いはまだありません。")
+    );
+    return;
+  }
+
+  savedQuestions.forEach(question => {
+    const card = createElement("div", "card");
+
+    card.appendChild(
+      createElement("div", "post-title", question.text)
+    );
+
+    if (question.image) {
+      const img = document.createElement("img");
+      img.className = "post-image";
+      img.src = question.image;
+      img.alt = "添付画像";
+      card.appendChild(img);
+    }
+
+    const button = createElement(
+      "button",
+      "danger",
+      "持ち帰りを解除"
+    );
+
+    button.addEventListener("click", () => {
+      toggleSaved(question.id);
+    });
+
+    card.appendChild(button);
+    list.appendChild(card);
+  });
+}
+
+
+/* --------------------------------
+   非表示・再表示
+-------------------------------- */
+
+function hideItem(id) {
+  if (!data.hidden.includes(id)) {
+    data.hidden.push(id);
+  }
+
+  saveData();
+  renderAll();
+}
+
+function restoreItem(id) {
+  data.hidden = data.hidden.filter(item => item !== id);
+
+  saveData();
+  renderAll();
+}
+
+function renderHidden() {
+  const list = document.getElementById("hiddenList");
+  list.replaceChildren();
+
+  const hiddenQuestions = data.questions.filter(
+    q => data.hidden.includes(q.id)
+  );
+
+  const hiddenDiscoveries = data.discoveries.filter(
+    q => data.hidden.includes(q.id)
+  );
+
+  if (
+    hiddenQuestions.length === 0 &&
+    hiddenDiscoveries.length === 0
+  ) {
+    list.appendChild(
+      createElement("div", "empty", "非表示にした投稿はありません。")
+    );
+    return;
+  }
+
+  [...hiddenQuestions, ...hiddenDiscoveries].forEach(item => {
+    const card = createElement("div", "card");
+
+    card.appendChild(
+      createElement("div", "post-title", item.text)
+    );
+
+    const button = createElement(
+      "button",
+      "secondary",
+      "再表示する"
+    );
+
+    button.addEventListener("click", () => {
+      restoreItem(item.id);
+    });
+
+    card.appendChild(button);
+    list.appendChild(card);
+  });
+}
+
+document.getElementById("restoreAll")
+  .addEventListener("click", () => {
+    data.hidden = [];
+    saveData();
+    renderAll();
+  });
+
+
+/* --------------------------------
+   全体の再描画
+-------------------------------- */
+
+function renderAll() {
+  renderPhotoGrid();
+  renderDiscoveryArea();
+  renderDiscoveryList();
+  renderQuestionList();
+  renderSaved();
+  renderHidden();
+}
+
+renderAll();
+
+</script>
+
+</body>
+</html>
