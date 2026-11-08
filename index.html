@@ -442,24 +442,38 @@ input:focus, textarea:focus {
 /* --------------------------------
    写真データ
 -------------------------------- */
+  your-project/
+├── index.html
+├── style.css
+└── images/
+    ├── home.png
+    ├── school.png
+    └── town.png
+
+  <img src="./images/home.png" alt="家の中">
+
+<img src="./images/school.png" alt="学校">
+
+<img src="./images/town.png" alt="町・外出先">
 
 const photos = [
+  
   {
     id: "rain",
     title: "1",
-    src: "https://chatgpt.com/s/m_6af032b1e7908191907c80dd777a88a7",
+    src: "./images/home.png",
     alt: "家の中"
   },
   {
     id: "roots",
     title: "2",
-    src: "https://chatgpt.com/s/m_6af032d221f48191826176e812a88724",
+    src: "./images/school.png",
     alt: "学校"
   },
   {
     id: "rust",
     title: "3",
-    src: "https://chatgpt.com/s/m_6af0346ed3e881919a59b952bbaf8c3a",
+    src: "./images/town.png",
     alt: "街の中"
   }
 ];
