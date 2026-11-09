@@ -125,6 +125,17 @@ textarea {
   border-radius: 10px;
   background: #edf1ed;
 }
+/* 問いへの招待状専用の画像 */
+.invitation-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #edf1ed;
+  margin-bottom: 15px;
+}
 
 .tag {
   display: inline-block;
@@ -230,7 +241,7 @@ hr {
     <img
       src="./images/onigirizusi.png.jpg"
       alt="問いへの招待状の写真"
-      class="photo"
+      class="invitation-photo"
       onerror="this.style.display='none'"
     >
 
