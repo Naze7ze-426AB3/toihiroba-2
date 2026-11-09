@@ -6,9 +6,7 @@
 <title>問い広場｜問いへの招待状</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -31,7 +29,6 @@ header h1 {
 }
 
 header p {
-  margin: 8px 0 0;
   color: #60746a;
 }
 
@@ -58,9 +55,7 @@ main {
   padding: 25px 16px 70px;
 }
 
-section {
-  margin: 35px 0;
-}
+section { margin: 35px 0; }
 
 h2 {
   font-size: 22px;
@@ -81,10 +76,7 @@ h2 {
   border: 1px solid #e6ebe7;
 }
 
-.card h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
+.card h3 { margin-top: 0; }
 
 button {
   border: none;
@@ -94,11 +86,10 @@ button {
   padding: 10px 18px;
   font-size: 14px;
   cursor: pointer;
+  margin: 4px 3px 4px 0;
 }
 
-button:hover {
-  opacity: 0.8;
-}
+button:hover { opacity: .8; }
 
 button.sub {
   background: #e9efeb;
@@ -129,7 +120,7 @@ textarea {
 
 .photo {
   width: 100%;
-  height: 150px;
+  height: 170px;
   object-fit: cover;
   border-radius: 10px;
   background: #edf1ed;
@@ -142,6 +133,7 @@ textarea {
   padding: 3px 10px;
   border-radius: 20px;
   font-size: 12px;
+  margin-bottom: 8px;
 }
 
 .answer {
@@ -149,10 +141,44 @@ textarea {
   padding: 12px;
   border-radius: 9px;
   margin: 10px 0;
+  overflow-wrap: anywhere;
 }
 
-.hidden {
+.post-image {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin: 10px 0;
+  background: #f5f7f5;
+}
+
+.preview {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
   display: none;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.category-button {
+  width: 100%;
+  text-align: left;
+  background: white;
+  color: #47675a;
+  border: 1px solid #e0e9e2;
+  padding: 16px;
+}
+
+.category-button.selected {
+  background: #dcebe3;
+  border: 2px solid #719b84;
+}
+
+.small {
+  font-size: 12px;
+  color: #89958e;
 }
 
 footer {
@@ -168,7 +194,6 @@ hr {
   border-top: 1px solid #e5eae6;
   margin: 15px 0;
 }
-
 </style>
 </head>
 
@@ -201,21 +226,36 @@ hr {
   </p>
 
   <div class="card">
+
+    <img
+      src="./images/invitation.png"
+      alt="問いへの招待状の写真"
+      class="photo"
+      onerror="this.style.display='none'"
+    >
+
     <span class="tag">今日の問い</span>
+
     <h3 id="starterQuestion"></h3>
+
     <p id="starterDescription"></p>
 
     <textarea id="starterAnswer"
       placeholder="あなたの考えを書いてみよう"></textarea>
 
     <button onclick="answerStarter()">考えを投稿する</button>
-    <button class="sub" onclick="nextStarter()">別の問いを見る</button>
+
+    <button class="sub" onclick="nextStarter()">
+      別の問いを見る
+    </button>
+
   </div>
 </section>
 
 <!-- ジャンル -->
 
 <section id="categories">
+
   <h2>好きなところから考えてみよう</h2>
 
   <p class="description">
@@ -223,11 +263,13 @@ hr {
   </p>
 
   <div class="grid" id="categoryList"></div>
+
 </section>
 
 <!-- 問いの発掘 -->
 
 <section id="discover">
+
   <h2>これってなんで？発掘隊</h2>
 
   <p class="description">
@@ -237,24 +279,21 @@ hr {
   <div class="grid">
 
     <div class="card">
-      <img class="photo" src="./images/home.png"
-        alt="家の中の風景">
+      <img class="photo" src="./images/home.png" alt="家の中">
       <h3>家の中</h3>
       <p>いつも見ているものに、疑問は隠れていないかな？</p>
       <button onclick="choosePhoto('家の中')">問いを考える</button>
     </div>
 
     <div class="card">
-      <img class="photo" src="./images/明るい日本の高校教室風景.png"
-        alt="学校の教室">
+      <img class="photo" src="./images/school.png" alt="学校">
       <h3>学校</h3>
-      <p>当たり前だと思っている教室の中にはどんな不思議があるかな？</p>
+      <p>当たり前だと思っている学校の仕組みは？</p>
       <button onclick="choosePhoto('学校')">問いを考える</button>
     </div>
 
     <div class="card">
-      <img class="photo" src="./images/晴れ渡る街角のJR駅前交差点.png"
-        alt="駅前の街並み">
+      <img class="photo" src="./images/town.png" alt="街の中">
       <h3>街の中</h3>
       <p>街を歩いていると、何か発見できるかも。</p>
       <button onclick="choosePhoto('街の中')">問いを考える</button>
@@ -264,15 +303,19 @@ hr {
 
   <div class="card">
     <h3 id="photoTitle">気になったものは？</h3>
+
     <textarea id="photoQuestion"
       placeholder="疑問や不思議に思ったことを書いてみよう"></textarea>
+
     <button onclick="postPhotoQuestion()">問いを共有する</button>
   </div>
+
 </section>
 
 <!-- 雑談部屋 -->
 
 <section id="room">
+
   <h2>問いの雑談部屋</h2>
 
   <p class="description">
@@ -282,36 +325,72 @@ hr {
   </p>
 
   <div class="card">
+
     <h3>新しい問いを投稿する</h3>
 
+    <label for="questionTitle">タイトル（任意）</label>
+
     <input id="questionTitle"
-      placeholder="問いのタイトル">
+      placeholder="タイトルをつけても、つけなくてもOK">
+
+    <label for="questionCategory">ジャンル</label>
 
     <select id="questionCategory">
       <option>食べ物・料理</option>
-      <option>スポーツ</option>
-      <option>暮らし・社会・日常</option>
+      <option>科学・技術</option>
+      <option>暮らし・社会</option>
       <option>自然・生き物</option>
       <option>芸術・表現</option>
       <option>宇宙・未知</option>
       <option>その他</option>
     </select>
 
+    <label for="questionBody">問いの内容</label>
+
     <textarea id="questionBody"
       placeholder="どんなことが気になりましたか？"></textarea>
 
+    <label for="questionImage">画像（任意）</label>
+
+    <input type="file"
+      id="questionImage"
+      accept="image/*"
+      onchange="previewPostImage(event)">
+
+    <img id="postImagePreview" class="preview" alt="画像プレビュー">
+
     <button onclick="postQuestion()">投稿する</button>
+
   </div>
 
-  <div>
-    <h3>みんなの問い</h3>
-    <div id="questionList"></div>
+  <h3>みんなの問い</h3>
+
+  <div class="card">
+    <label for="filterCategory">ジャンルで絞り込む</label>
+
+    <select id="filterCategory" onchange="renderQuestions()">
+      <option value="すべて">すべてのジャンル</option>
+      <option>食べ物・料理</option>
+      <option>科学・技術</option>
+      <option>暮らし・社会</option>
+      <option>自然・生き物</option>
+      <option>芸術・表現</option>
+      <option>宇宙・未知</option>
+      <option>その他</option>
+      <option>今日の問い</option>
+    </select>
+
+    <p class="small" id="postCount"></p>
   </div>
+
+  <div id="questionList"></div>
+
 </section>
 
 <!-- 保存 -->
 
 <section id="saved">
+
   <h2>問いの持ち帰り</h2>
 
   <p class="description">
@@ -319,6 +398,7 @@ hr {
   </p>
 
   <div id="savedList"></div>
+
 </section>
 
 </main>
@@ -356,12 +436,11 @@ const starters = [
 
 const categories = [
   "食べ物・料理",
-  "スポーツ",
-  "暮らし・社会・日常",
+  "科学・技術",
+  "暮らし・社会",
   "自然・生き物",
   "芸術・表現",
-  "宇宙・未知",
-  "その他"
+  "宇宙・未知"
 ];
 
 let starterIndex = 0;
@@ -391,6 +470,89 @@ function saveData() {
 }
 
 // -------------------------
+// 画像の読み込み・圧縮
+// -------------------------
+
+function compressImage(file) {
+  return new Promise((resolve, reject) => {
+
+    if (!file.type.startsWith("image/")) {
+      reject(new Error("画像ファイルを選択してください。"));
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const image = new Image();
+
+      image.onload = () => {
+        const maxSize = 900;
+
+        let width = image.width;
+        let height = image.height;
+
+        if (width > maxSize || height > maxSize) {
+          const ratio = Math.min(
+            maxSize / width,
+            maxSize / height
+          );
+
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext("2d");
+
+        context.drawImage(image, 0, 0, width, height);
+
+        resolve(canvas.toDataURL("image/jpeg", 0.75));
+      };
+
+      image.onerror = () => reject(new Error("画像を読み込めませんでした。"));
+      image.src = reader.result;
+    };
+
+    reader.onerror = () => reject(new Error("ファイルを読み込めませんでした。"));
+    reader.readAsDataURL(file);
+  });
+}
+
+// -------------------------
+// 投稿画像のプレビュー
+// -------------------------
+
+function previewPostImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById("postImagePreview");
+
+  if (!file) {
+    preview.style.display = "none";
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    alert("画像ファイルを選択してください。");
+    event.target.value = "";
+    preview.style.display = "none";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    preview.src = reader.result;
+    preview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+}
+
+// -------------------------
 // 招待状
 // -------------------------
 
@@ -404,7 +566,9 @@ function showStarter() {
 
 function nextStarter() {
   starterIndex = (starterIndex + 1) % starters.length;
+
   document.getElementById("starterAnswer").value = "";
+
   showStarter();
 }
 
@@ -421,6 +585,7 @@ function answerStarter() {
     title: starters[starterIndex].title,
     category: "今日の問い",
     body: answer,
+    image: "",
     answers: [],
     revealed: true
   });
@@ -443,23 +608,23 @@ function renderCategories() {
   area.innerHTML = "";
 
   categories.forEach(category => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    const title = document.createElement("h3");
-    title.textContent = category;
 
     const button = document.createElement("button");
-    button.textContent = "このジャンルを見る";
+
+    button.className = "category-button";
+    button.textContent = category;
+
     button.onclick = () => {
-      document.getElementById("questionCategory").value = category;
+      document.getElementById("filterCategory").value = category;
+
+      renderQuestions();
+
       document.getElementById("room").scrollIntoView({
         behavior: "smooth"
       });
     };
 
-    card.append(title, button);
-    area.appendChild(card);
+    area.appendChild(button);
   });
 }
 
@@ -484,11 +649,12 @@ function postPhotoQuestion() {
 
   questions.unshift({
     id: Date.now(),
-    title: "身近なところから見つけた問い",
+    title: "",
     category: "暮らし・社会",
     body: body,
+    image: "",
     answers: [],
-    revealed: true
+    revealed: false
   });
 
   saveData();
@@ -503,30 +669,58 @@ function postPhotoQuestion() {
 // 問いを投稿
 // -------------------------
 
-function postQuestion() {
+async function postQuestion() {
+
   const title = document.getElementById("questionTitle").value.trim();
+
   const body = document.getElementById("questionBody").value.trim();
+
   const category = document.getElementById("questionCategory").value;
 
-  if (!title || !body) {
-    alert("タイトルと内容を入力してください。");
+  const file = document.getElementById("questionImage").files[0];
+
+  if (!body) {
+    alert("問いの内容を入力してください。");
     return;
   }
 
-  questions.unshift({
+  let image = "";
+
+  if (file) {
+    try {
+      image = await compressImage(file);
+    } catch (error) {
+      alert(error.message);
+      return;
+    }
+  }
+
+  const newQuestion = {
     id: Date.now(),
     title: title,
     category: category,
     body: body,
+    image: image,
     answers: [],
     revealed: false
-  });
+  };
 
-  saveData();
-  renderQuestions();
+  questions.unshift(newQuestion);
+
+  try {
+    saveData();
+  } catch (error) {
+    questions.shift();
+    alert("保存できませんでした。画像のサイズが大きい可能性があります。画像を小さくして再度お試しください。");
+    return;
+  }
 
   document.getElementById("questionTitle").value = "";
   document.getElementById("questionBody").value = "";
+  document.getElementById("questionImage").value = "";
+  document.getElementById("postImagePreview").style.display = "none";
+
+  renderQuestions();
 
   alert("問いを投稿しました！");
 }
@@ -536,30 +730,62 @@ function postQuestion() {
 // -------------------------
 
 function renderQuestions() {
+
   const area = document.getElementById("questionList");
+
+  const selectedCategory =
+    document.getElementById("filterCategory").value;
 
   area.innerHTML = "";
 
-  if (questions.length === 0) {
-    area.textContent = "まだ問いがありません。最初の問いを投稿してみませんか？";
+  const filteredQuestions = questions.filter(question => {
+
+    const category = question.category || "その他";
+
+    return selectedCategory === "すべて" ||
+      category === selectedCategory;
+
+  });
+
+  document.getElementById("postCount").textContent =
+    filteredQuestions.length + "件の問い";
+
+  if (filteredQuestions.length === 0) {
+
+    area.textContent =
+      "このジャンルには、まだ問いがありません。最初の問いを置いてみませんか？";
+
     return;
   }
 
-  questions.forEach(question => {
+  filteredQuestions.forEach(question => {
+
     const card = document.createElement("div");
     card.className = "card";
 
     const tag = document.createElement("span");
     tag.className = "tag";
-    tag.textContent = question.category;
+    tag.textContent = question.category || "その他";
 
-    const title = document.createElement("h3");
-    title.textContent = question.title;
+    card.appendChild(tag);
+
+    if (question.title) {
+      const title = document.createElement("h3");
+      title.textContent = question.title;
+      card.appendChild(title);
+    }
 
     const body = document.createElement("p");
     body.textContent = question.body;
+    card.appendChild(body);
 
-    const answerArea = document.createElement("div");
+    if (question.image) {
+      const image = document.createElement("img");
+      image.src = question.image;
+      image.alt = "投稿された画像";
+      image.className = "post-image";
+      card.appendChild(image);
+    }
 
     const textarea = document.createElement("textarea");
     textarea.placeholder = "あなたならどう考える？";
@@ -568,11 +794,16 @@ function renderQuestions() {
     answerButton.textContent = "考えを返す";
 
     answerButton.onclick = () => {
+
       const answer = textarea.value.trim();
 
       if (!answer) {
         alert("考えを書いてください。");
         return;
+      }
+
+      if (!Array.isArray(question.answers)) {
+        question.answers = [];
       }
 
       question.answers.push(answer);
@@ -582,29 +813,34 @@ function renderQuestions() {
       renderQuestions();
     };
 
-    card.append(tag, title, body, textarea, answerButton);
+    card.append(textarea, answerButton);
 
-    if (question.revealed && question.answers.length > 0) {
-      const divider = document.createElement("hr");
-      card.appendChild(divider);
+    if (question.revealed && question.answers && question.answers.length > 0) {
+
+      card.appendChild(document.createElement("hr"));
 
       const answerHeading = document.createElement("h3");
       answerHeading.textContent = "寄せられた考え";
+
       card.appendChild(answerHeading);
 
       question.answers.forEach(answer => {
+
         const item = document.createElement("div");
         item.className = "answer";
         item.textContent = answer;
+
         card.appendChild(item);
       });
     }
 
     const saveButton = document.createElement("button");
+
     saveButton.className = "sub";
     saveButton.textContent = "問いを持ち帰る";
 
     saveButton.onclick = () => {
+
       if (saved.some(item => item.id === question.id)) {
         alert("すでに保存されています。");
         return;
@@ -625,6 +861,7 @@ function renderQuestions() {
     card.appendChild(saveButton);
 
     area.appendChild(card);
+
   });
 }
 
@@ -633,6 +870,7 @@ function renderQuestions() {
 // -------------------------
 
 function renderSaved() {
+
   const area = document.getElementById("savedList");
 
   area.innerHTML = "";
@@ -643,11 +881,15 @@ function renderSaved() {
   }
 
   saved.forEach(item => {
+
     const card = document.createElement("div");
     card.className = "card";
 
-    const title = document.createElement("h3");
-    title.textContent = item.title;
+    if (item.title) {
+      const title = document.createElement("h3");
+      title.textContent = item.title;
+      card.appendChild(title);
+    }
 
     const body = document.createElement("p");
     body.textContent = item.body;
@@ -657,12 +899,15 @@ function renderSaved() {
     removeButton.textContent = "保存を解除";
 
     removeButton.onclick = () => {
+
       saved = saved.filter(q => q.id !== item.id);
+
       saveData();
       renderSaved();
     };
 
-    card.append(title, body, removeButton);
+    card.append(body, removeButton);
+
     area.appendChild(card);
   });
 }
