@@ -294,14 +294,14 @@ hr {
     </div>
 
     <div class="card">
-      <img class="photo" src="./images/" alt="学校">
+      <img class="photo" src="./images/明るい日本の高校教室風景.png" alt="学校">
       <h3>学校</h3>
       <p>当たり前だと思っている学校の仕組みは？</p>
       <button onclick="choosePhoto('学校')">問いを考える</button>
     </div>
 
     <div class="card">
-      <img class="photo" src="./images/town.png" alt="街の中">
+      <img class="photo" src="./images/晴れ渡る街角のJR駅前交差点.png" alt="街の中">
       <h3>街の中</h3>
       <p>街を歩いていると、何か発見できるかも。</p>
       <button onclick="choosePhoto('街の中')">問いを考える</button>
@@ -329,7 +329,7 @@ hr {
   <p class="description">
     自分の問いを置いてみよう。
     誰かの考えを読んだり、自分の考えを返したり。
-    参加の仕方は自由です。
+    参加の仕方は自由です!
   </p>
 
   <div class="card">
@@ -339,14 +339,14 @@ hr {
     <label for="questionTitle">タイトル（任意）</label>
 
     <input id="questionTitle"
-      placeholder="タイトルをつけても、つけなくてもOK">
+      placeholder="タイトルはつけても、つけなくてもOK">
 
     <label for="questionCategory">ジャンル</label>
 
     <select id="questionCategory">
       <option>食べ物・料理</option>
-      <option>科学・技術</option>
-      <option>暮らし・社会</option>
+      <option>スポーツ</option>
+      <option>暮らし・社会・日常</option>
       <option>自然・生き物</option>
       <option>芸術・表現</option>
       <option>宇宙・未知</option>
@@ -379,8 +379,8 @@ hr {
     <select id="filterCategory" onchange="renderQuestions()">
       <option value="すべて">すべてのジャンル</option>
       <option>食べ物・料理</option>
-      <option>科学・技術</option>
-      <option>暮らし・社会</option>
+      <option>スポーツ</option>
+      <option>暮らし・社会・日常</option>
       <option>自然・生き物</option>
       <option>芸術・表現</option>
       <option>宇宙・未知</option>
@@ -425,8 +425,8 @@ hr {
 
 const starters = [
   {
-    title: "おにぎりとおすし、何が違う？",
-    description: "どちらもお米を使っているけれど、あなたはどう考える？"
+    title: "これ↑ってなんだろう？",
+    description: "おにぎり？お寿司？それとも別の何か？あなたはどう考える？"
   },
   {
     title: "目玉焼きに正解はある？",
@@ -444,11 +444,12 @@ const starters = [
 
 const categories = [
   "食べ物・料理",
-  "科学・技術",
-  "暮らし・社会",
+  "スポーツ",
+  "暮らし・社会・日常",
   "自然・生き物",
   "芸術・表現",
-  "宇宙・未知"
+  "宇宙・未知",
+  "その他"
 ];
 
 let starterIndex = 0;
@@ -658,7 +659,7 @@ function postPhotoQuestion() {
   questions.unshift({
     id: Date.now(),
     title: "",
-    category: "暮らし・社会",
+    category: "暮らし・社会・日常",
     body: body,
     image: "",
     answers: [],
@@ -670,7 +671,7 @@ function postPhotoQuestion() {
 
   document.getElementById("photoQuestion").value = "";
 
-  alert("問いを共有しました！");
+  alert("問いを共有しました！伝えてくれてありがとう！！");
 }
 
 // -------------------------
